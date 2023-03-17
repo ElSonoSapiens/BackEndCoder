@@ -1,0 +1,41 @@
+// app.js
+
+import express from "express";
+import rutaX from "./routes/rutaX.router.js";
+
+const app = express();
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+app.get("/", (req,res)=>{})
+app.use("/", rutaX);
+
+const PORT = 8080;
+
+app.listen(PORT, () => {
+	console.log(`Escuchando al puerto ${PORT}`);
+});
+
+// En el objeto REQUEST va a viajar la informacion del cliente
+// En el objeto RESPONSE va a viajar la información desde el servidor al cliente
+
+// __dirname => utils.js
+
+import { dirname } from "path";
+import { fileURLToPath } from "url";
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
+
+export default __dirname;
+// en app.js
+app.use(express.static(__dirname+"/public")) // archivos públicos/estáticos
+
+// archivos estáticos se guardan en carpeta public
+
+app.engine("handlebars",handlebars.engine()) // solo para HANDLEBARS o un motor propio
+
+
+
+
+
