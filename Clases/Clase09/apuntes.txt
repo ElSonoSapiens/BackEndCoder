@@ -1,0 +1,28 @@
+interfaz grafica desde el servidor
+
+Genera contenido html de forma dinámica
+Plantilla html que contiene código JS
+
+Así se ver una {{variable}} en una Plantilla
+<h1> Hola {{hombre}} </h1>
+
+Ya existen motores de plantilla que trabajan con express - esos vamos a usar
+
+Mas utilizados => Handlebars - EJD - PUBJS
+
+Motor plantilla VS libreria/framework
+	Se suelen utilizar cuando se envía al usuario desde el back => Templates dinámicos
+
+Nivel de dinamismo
+
+	Que tanta interaccion tiene el cliente con la pagina
+	Tener definido el nivel de dinamismo con el cliente
+		
+		Landing page => html+css+JS básico
+		Website con poca interaccion => motor plantilla => renderiza plantilla por completo
+		WebApp => framework => VirtualDOM mejora la performance
+
+Tomar consciencia de cuanto trabajo se va a realizar y cuanto necesita el proyecto.
+
+Lo Mas usado => variables, ciclos y condicionales
+Cada motor de plantilla trabaja con distintas estructuras
