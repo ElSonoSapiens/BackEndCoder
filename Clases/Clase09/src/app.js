@@ -14,7 +14,7 @@ app.use(express.static(__dirname + "/public")); // archivos públicos/estáticos
 app.engine("handlebars", handlebars.engine()); // solo para HANDLEBARS o un motor propio
 
 app.set("views", __dirname + "/views"); // que setting va a configurar
-app.set("view engine", "nombre del motor"); // cual es el motor de plantilla
+app.set("view engine", "handlebars"); // cual es el motor de plantilla
 
 app.get("/", (req, res) => {
 	res.send("HANDLEBARS");
