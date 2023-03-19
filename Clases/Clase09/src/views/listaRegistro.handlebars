@@ -1,0 +1,13 @@
+{{#if users.length}}
+
+	{{#each users}}	{{! etiqueta apertura con # }}
+
+		<p>Hola {{nombre}} </p>
+		<p>Tu correo es {{email}} y tu contraseña es {{contrasena}}</p>
+	
+	{{/each}}	{{! etiqueta de cierre con / }}
+
+{{else}}
+	<h2>No hay usuarios registrados</h2>
+
+{{/if}}
