@@ -1,0 +1,26 @@
+Websocket vs HTTPS
+
+  Websocket utiliza 2 endpoints, uno para el servidor y otro para el cliente.
+  De tal forma la comunicacion no se cae, y nueva información puede llegar al cliente sin que el lo solicite. Ej: Subastas
+
+  HTTP Long Polling => el cliente vuelve a solicitar una peticion tan pronto como reciba una respuesta del servidor.
+    Es una operación costosa y lenta para considerarse "tiempo real".
+
+  Websocket   
+    - El cliente no debe estar actualizando la pagina constantemente
+    - En cuanto el servidos reciba una actualizacion de una nueva puja, actualizara a todos los clientes conectados => tiempo real
+    - Cuando termina la subasta el socket se cierra y el servidor deja de notificar
+
+    Funcionamiento
+      EL cliente primero envia una solicitud HTTP llamada Handshake => acuerdo o contrato de confianza para que el servidor pueda actualizar al cliente sin que se lo pida.
+
+    Ejemplos
+      - Chats
+      - Noticias importantes
+      - Bolsa
+      - Videojuegos
+      - Compra/Venta a través de subastas
+
+    Herramienta a usar:
+      -Socket.IO
+      

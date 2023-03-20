@@ -1,3 +1,15 @@
+npm init -y
+npm i express
+npm i nodemon
+npm i express-handlebars
+npm i socket.io
+
+
+
+
+
+
+
 // app.js
 
 import express from "express";
