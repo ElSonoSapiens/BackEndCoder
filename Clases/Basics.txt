@@ -4,11 +4,7 @@ npm i nodemon
 npm i express-handlebars
 npm i socket.io
 
-
-
-
-
-
+npm i nodemon express express-handlebars socket.io
 
 // app.js
 
