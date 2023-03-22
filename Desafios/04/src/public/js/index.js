@@ -35,7 +35,6 @@ addProduct.addEventListener("click", (e) => {
 		e.preventDefault();
 		return console.log("Incompleted fields");
 	} else {
-		console.log("Product added");
 		socketClient.emit("newProduct", newProduct);
 	}
 });
@@ -48,7 +47,17 @@ deleteProduct.addEventListener("click", (e) => {
 	const element = e.target;
 	const productId = element.getAttribute("data-id");
 	if (element.className === "classDeleteProduct") {
-		console.log(`El boton pulsado tiene el id: ${productId}`);
 		socketClient.emit("deleteProduct", parseInt(productId));
+		document.location.reload()
 	}
 });
+
+/*
+const productTable = document.querySelector('#product-table tbody');
+productTable.innerHTML = '';
+products.forEach((product) => {
+		const tr = document.createElement('tr');
+		tr.innerHTML = `<td>${product.title}</td><td>$${product.price}</td><td><button class="delete-product" data-id="${product.id}">Borrar</button></td>`;
+		productTable.appendChild(tr);
+});
+*/
