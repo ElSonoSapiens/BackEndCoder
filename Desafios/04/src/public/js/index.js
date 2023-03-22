@@ -51,13 +51,3 @@ deleteProduct.addEventListener("click", (e) => {
 		document.location.reload()
 	}
 });
-
-/*
-const productTable = document.querySelector('#product-table tbody');
-productTable.innerHTML = '';
-products.forEach((product) => {
-		const tr = document.createElement('tr');
-		tr.innerHTML = `<td>${product.title}</td><td>$${product.price}</td><td><button class="delete-product" data-id="${product.id}">Borrar</button></td>`;
-		productTable.appendChild(tr);
-});
-*/
