@@ -40,7 +40,7 @@ socketServer.on("connection", (socket) => {
 	socket.on(`disconnect`, () => {
 		console.log(`Client disconnected: ${socket.id}`); // log para cuando se cae la comunicación
 	});
-	// Emitir un evento => socketClient.on //
+	// Emitir un evento => socketClient.emit //
 	socket.emit("bienvenida", `Bienvenido a WEBSOCKET cliente con id: ${socket.id}`); //("Nombre el evento", Info que quiero enviar)
 	socket.on("respuestaBienvenida", (response) => {
 		// recibe el emit de socketClient.emit

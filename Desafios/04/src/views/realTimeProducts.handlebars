@@ -1,7 +1,3 @@
-{{! script para el cliente. Contiene todas las funconalidades que el cliente necesita para trabajar con socket.io}}
-<script src="/socket.io/socket.io.js"></script>
-<script src="/js/index.js"></script>
-
 <h2>Products (Real Time)</h2>
 
 <table id="productsTable" border="1">
@@ -30,7 +26,7 @@
 				<td> {{stock}}</td>
 				<td> {{status}}</td>
 				<td> {{category}}</td>
-				<td><button class="deleteProduct" data-id="{{id}}">Borrar</button></td>
+				<td><button id="deleteProduct" data-id="{{id}}">Borrar</button></td>
 			</tr>
 		{{/each}}
 	</tbody>
@@ -41,7 +37,6 @@
 <h2>Agregar Producto</h2>
 
 <form id="createProduct">
-	<input type="text" id="productId" name="id" placeholder="id" />
 	<input type="text" id="productTitle" name="title" placeholder="title" />
 	<input type="text" id="productDescription" name="description" placeholder="description" />
 	<input type="number" id="productPrice" name="price" placeholder="price" />
@@ -51,5 +46,8 @@
 	<input type="text" id="productStatus" name="status" placeholder="status" />
 	<input type="text" id="productCategory" name="category" placeholder="category" />
 
-	<button type="submit">Agregar</button>
+	<button type="submit" id ="addProduct">Agregar</button>
 </form>
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="/js/index.js"></script>

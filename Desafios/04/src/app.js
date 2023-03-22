@@ -1,10 +1,12 @@
 import express from "express";
-import usersRouter from "./routes/products.router.js";
+import productsRouter from "./routes/products.router.js";
 import cartsRouter from "./routes/carts.router.js";
 import { __dirname } from "./utils.js";
 import handlebars from "express-handlebars";
 import viewsRouter from "./routes/views.router.js";
 import { Server } from "socket.io";
+import ProductManager from "./ProductManager.js";
+const productManager = new ProductManager(__dirname + "/Products.json");
 
 const app = express();
 
@@ -27,7 +29,7 @@ app.set("view engine", "handlebars");
 
 // ROUTES
 app.use("/views", viewsRouter);
-app.use("/api/products", usersRouter);
+app.use("/api/products", productsRouter);
 app.use("/api/carts", cartsRouter);
 
 // SOCKET Server
@@ -40,4 +42,15 @@ socketServer.on("connection", (socket) => {
 	socket.on(`disconnect`, () => {
 		console.log(`Client disconnected: ${socket.id}`); // log para cuando se cae la comunicación
 	});
+
+	socket.on("newProduct", (newProduct) => {
+		productManager.addProduct({ ...newProduct });
+		console.log(newProduct);
+	});
+
+	socket.on("deleteProduct", async (id) => {
+		console.log(id);
+		// productManager.deleteProductById(id);
+	});
+
 });
