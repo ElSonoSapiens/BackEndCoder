@@ -11,19 +11,7 @@ const inputStock = document.getElementById("productStock");
 const inputStatus = document.getElementById("productStatus");
 const inputCategory = document.getElementById("productCategory");
 
-const newProduct = {
-	title: inputTitle.value,
-	description: inputDescription.value,
-	price: inputPrice.value,
-	thumbnail: inputThumbnail.value,
-	code: inputCode.value,
-	stock: inputStock.value,
-	status: inputStatus.value,
-	category: inputCategory.value,
-};
-
 addProduct.addEventListener("click", (e) => {
-	e.preventDefault();
 	const newProduct = {
 		title: inputTitle.value,
 		description: inputDescription.value,
@@ -34,17 +22,33 @@ addProduct.addEventListener("click", (e) => {
 		status: true,
 		category: inputCategory.value,
 	};
-	console.log("Product added");
-	socketClient.emit("newProduct", newProduct);
+
+	if (
+		!newProduct.title ||
+		!newProduct.description ||
+		!newProduct.price ||
+		!newProduct.code ||
+		!newProduct.stock ||
+		!newProduct.status ||
+		!newProduct.category
+	) {
+		e.preventDefault();
+		return console.log("Incompleted fields");
+	} else {
+		console.log("Product added");
+		socketClient.emit("newProduct", newProduct);
+	}
 });
 
 // const deleteProduct = document.getElementById("deleteProduct")
-const deleteProduct = document.getElementsByClassName("delete")
-
+const deleteProduct = document.querySelector("#productsTable");
 
 deleteProduct.addEventListener("click", (e) => {
-	e.preventDefault();
-  //const productId = deleteProduct.data-id
-  console.log("click");
-  //socket.emit("deleteProduct", parseInt(data-id.value));
-})
+	//e.preventDefault();
+	const element = e.target;
+	const productId = element.getAttribute("data-id");
+	if (element.className === "classDeleteProduct") {
+		console.log(`El boton pulsado tiene el id: ${productId}`);
+		socketClient.emit("deleteProduct", parseInt(productId));
+	}
+});

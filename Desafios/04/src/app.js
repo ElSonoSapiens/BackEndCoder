@@ -44,13 +44,13 @@ socketServer.on("connection", (socket) => {
 	});
 
 	socket.on("newProduct", (newProduct) => {
+		console.log(`Product added: ${newProduct}`);
 		productManager.addProduct({ ...newProduct });
-		console.log(newProduct);
 	});
 
-	socket.on("deleteProduct", async (id) => {
-		console.log(id);
-		// productManager.deleteProductById(id);
+	socket.on("deleteProduct", (productId) => {
+		console.log(`Product deleted ${productId}`);
+		productManager.deleteProductById(productId);
 	});
 
 });
