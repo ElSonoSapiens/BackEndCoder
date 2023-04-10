@@ -1,4 +1,4 @@
-Conceptos sobre base de datos.
+Conceptos sobre base de datos. - Clase Mongo DB
 No vamos a codear nada -  todo teoría
 
 INTRODUCCION A BASE DE datos

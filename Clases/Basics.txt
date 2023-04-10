@@ -1,5 +1,6 @@
 npm init -y
-npm i nodemon express express-handlebars socket.io
+npm i nodemon express express-handlebars socket.io mongoose
+npm i nodemon express express-handlebars mongoose
 
 // app.js
 

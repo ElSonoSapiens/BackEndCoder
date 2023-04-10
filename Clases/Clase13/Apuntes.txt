@@ -1,0 +1,61 @@
+CRUD en MongoDB
+
+abrir mongoosh
+tipear mongo
+
+Comandos
+
+    show databases => muestra las bases de datos
+    use firstDB => swichea de base, pero no aparece hasta que tenga contenido
+
+    db.createCollection("products") => crear coleccion
+    show databases
+    show collections
+    db.carts.drop() => eliminar coleccion
+    db.dropDatabase() => elimina la base de datos
+
+CRUD
+
+    CREATE
+
+        db.users.insertOne({})
+        db.users.insertOne({name:"Diego",lastname:"Hernandez",age:33})
+        db.users.insertMany([{name:"Lis",lastname:"Novoa",age:31},{name:"Barbi",lastname:"Hernandez",age:8},{name:"Trini",lastname:"Hernandez",age:6}])
+
+    READ
+
+        db.users.find().preety() => mostra info de manera mas legible
+        $and : Realiza operación AND -> sintaxis: {$and: [ {},{} ] }
+        $or : Realiza operación OR -> sintaxis: {$or: [ {},{} ] }
+        $lt : Coincide con valores que son menores que un valor especificado.
+        $lte : Coincide con valores menores o iguales a un valor especificado.
+
+        $gt : Coincide con valores mayores a un valor especificado.
+        $gte : Coincide con valores mayores o iguales a un valor especificado.
+        $ne : Coincide con valores que no son iguales a un valor especificado.
+        $eq : Selecciona los documentos que son iguales a un valor especificado.
+
+        $exists : Selecciona los documentos según la existencia de un campo.
+        $in : Selecciona los documentos especificados en un array. 
+        sintaxis: {key:{$in: [array of values] } }
+        $nin : Coincide con ninguno de los valores especificados en un array.
+
+        $size : Coincide con el número de elementos especificados.
+        $all : Coincide con todos los valores definidos dentro de un array.
+        $elemMatch : Coincide con algún valor definido dentro del query.
+    
+        db.users.find({name:{$ne:"Diego"}}).sort({name:1}).pretty()
+
+    UPDATE
+
+        db.users.updateOne({name:"Diego"},{$set:{lastname:"Fuentes"}})
+        db.collection.updateMany(query,update,options) Actualiza múltiples documentos que cumplan con el criterio. 
+    
+    DELETE
+*
+
+
+
+
+
+
