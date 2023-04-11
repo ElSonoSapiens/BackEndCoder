@@ -1,0 +1,8 @@
+Clase17 - Mongo Avanzado (Parte II)
+
+Aggregation
+    - agrupar documentos con base en un criterio especificado
+    - Realizar alguna operacion sobre dichos documentos
+    - analizar cambios de info con el paso del tiempo
+    
+    Pipeline - tubería

@@ -1,15 +1,15 @@
-import express from "express";
-import { __dirname } from "./utils.js";
-import handlebars from "express-handlebars";
-import { Server } from "socket.io";
-import viewsRouter from "./routes/views.router.js";
+import express from 'express';
+import { __dirname } from './utils.js';
+import handlebars from 'express-handlebars';
+import { Server } from 'socket.io';
+import viewsRouter from './routes/views.router.js';
 
 const app = express();
 const PORT = 3000;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static(__dirname + "/public")); // archivos públicos/estáticos
+app.use(express.static(__dirname + '/public')); // archivos públicos/estáticos
 
 // HTTP Server
 const httpServer = app.listen(PORT, () => {
@@ -17,12 +17,12 @@ const httpServer = app.listen(PORT, () => {
 });
 
 // HANDLEBARS
-app.engine("handlebars", handlebars.engine());
-app.set("views", __dirname + "/views");
-app.set("view engine", "handlebars");
+app.engine('handlebars', handlebars.engine());
+app.set('views', __dirname + '/views');
+app.set('view engine', 'handlebars');
 
 // ROUTES
-app.use("/views", viewsRouter);
+app.use('/views', viewsRouter);
 
 // WEBSOCKET
 const infoMensajes = [];
@@ -30,16 +30,23 @@ const infoMensajes = [];
 // SOCKET Server
 const socketServer = new Server(httpServer);
 
-socketServer.on("connection", (socket) => {
+socketServer.on('connection', (socket) => {
 	console.log(`User connected : ${socket.id}`);
 
-	socket.on("disconnect", () => {
+	socket.on('disconnect', () => {
 		console.log(`User disconnected : ${socket.id}`);
 	});
 
-	socket.on("mensaje", (info) => {
+	socket.on('mensaje', (info) => {
 		infoMensajes.push(info);
 		// console.log(infoMensajes);
-        socketServer.emit("chat",infoMensajes)
+		socketServer.emit('chat', infoMensajes);
+	});
+
+	socket.on('usuarioNuevo', (usuario) => {
+		socket.broadcast.emit('broadcast', usuario);
+		socket.emit('chat', infoMensajes);
 	});
 });
+
+// 1:18hs
