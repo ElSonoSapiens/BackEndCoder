@@ -22,7 +22,6 @@ Swal.fire({
 	tituloUsuario.innerText = `Hola ${usuario}`;
 	// Evento de username ingresado
 	socketClient.emit('usuarioNuevo', usuario);
-	inputMessage.value = '';
 });
 
 // MESSAGES
