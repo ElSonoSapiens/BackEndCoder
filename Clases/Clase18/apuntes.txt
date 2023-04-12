@@ -1,0 +1,4 @@
+Clase 18 - Cookies, Sessions & Storages
+
+  Cookies
+    Archivos que se guardan en el navegador
