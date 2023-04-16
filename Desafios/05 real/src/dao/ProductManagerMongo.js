@@ -3,7 +3,7 @@ import { productsModel } from '../db/models/products.model.js';
 export default class ProductManager {
 	async getProducts() {
 		try {
-			const products = await productsModel.find();
+			const products = await productsModel.find().lean();
 			return products;
 		} catch (error) {
 			console.log(error);
@@ -11,7 +11,7 @@ export default class ProductManager {
 	}
 
 	async getProductById(idProd) {
-		const productsFile = await this.getProducts();
+		const productsFile = await this.getProducts().lean();
 		const product = productsFile.find((p) => p.id === idProd);
 		if (product) {
 			return product;
@@ -21,7 +21,7 @@ export default class ProductManager {
 	}
 
 	async addProduct(product) {
-		const productsFile = await this.getProducts();
+		const productsFile = await this.getProducts().lean();
 		const id = this.#idGenerator(productsFile);
 		const newProduct = {
 			id,
@@ -56,7 +56,7 @@ export default class ProductManager {
 
 	async updateProduct(idProd, product) {
 		try {
-			const productsFile = await this.getProducts();
+			const productsFile = await this.getProducts().lean();
 			if (productsFile) {
 				await productsModel.findOneAndUpdate({ _id: idProd }, product);
 				const updatedProduct = await this.getProductById(idProd);

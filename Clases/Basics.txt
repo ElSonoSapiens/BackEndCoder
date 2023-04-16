@@ -1,6 +1,8 @@
 npm init -y
-npm i nodemon express express-handlebars socket.io mongoose
-npm i nodemon express express-handlebars mongoose
+
+npm i nodemon
+npm i express express-handlebars socket.io mongoose
+npm i express express-handlebars mongoose
 
 // app.js
 
@@ -26,12 +28,11 @@ app.listen(PORT, () => {
 
 // __dirname => utils.js
 
-import { dirname } from "path";
-import { fileURLToPath } from "url";
+import { dirname } from 'path';
+import { fileURLToPath } from 'url';
 
-const __dirname = dirname(fileURLToPath(import.meta.url));
+export const __dirname = dirname(fileURLToPath(import.meta.url));
 
-export default __dirname;
 // en app.js
 app.use(express.static(__dirname+"/public")) // archivos públicos/estáticos
 
@@ -39,6 +40,20 @@ app.use(express.static(__dirname+"/public")) // archivos públicos/estáticos
 
 app.engine("handlebars",handlebars.engine()) // solo para HANDLEBARS o un motor propio
 
+
+// DBCONFIG
+
+import mongoose from 'mongoose';
+
+const URI =
+	'mongodb+srv://elSonoSapiens:2xyjhtHqPvGEOdZG@cluster0.eu8lqfi.mongodb.net/ecommerce?retryWrites=true&w=majority';
+
+mongoose
+	.connect(URI)
+	.then(() => console.log('Conectado a la db'))
+	.catch((error) => console.log(error));
+
+//
 
 
 

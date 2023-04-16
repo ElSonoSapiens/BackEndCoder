@@ -56,7 +56,8 @@ socketServer.on('connection', async (socket) => {
 		console.log(`Client disconnected: ${socket.id}`); // log para cuando se cae la comunicación
 	});
 
-	//socket.emit('products', products);
+	socket.emit('products', products);
+	console.log(products);
 
 	//PRODUCTS
 	socket.on('newProduct', (newProduct) => {

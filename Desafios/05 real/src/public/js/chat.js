@@ -33,7 +33,6 @@ formulario.onsubmit = async (e) => {
 };
 
 // CHAT
-
 function validator(message) {
 	if (message.user && message.message) {
 		return true;
@@ -48,7 +47,6 @@ function validator(message) {
 
 socketClient.on('chat', (mensajes) => {
 	//	console.log(mensajes);
-
 	const chatParrafo = mensajes
 		.map((obj) => {
 			return `<p>${obj.user}: ${obj.message} </p>`;

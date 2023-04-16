@@ -1,4 +1,20 @@
 Clase 18 - Cookies, Sessions & Storages
 
   Cookies
-    Archivos que se guardan en el navegador
+    Archivos que se guardan en el navegador => facilmente accesible por multiples elementos externos
+    almacena info dentro del navegador por ej: nombre usuario, ID de sesion, preferencias de pagina
+    NO almacena informacion delicada
+    NO afecta al cliente
+
+    npm i cookie-parser
+
+    Se puede modificar la cookie desde el navegador y el servidor no tiene forma de saberlo
+
+    Las cookies firmadas son un poco mas seguras
+
+  Sessions  
+    Conexion sin estado => ejecutar una peticion, el servidor responde y muere todo ahi.
+    Al servidor no le intersa lo que parse
+    Si el servidor no sabe quien ejecuta la peticion, como hace para saber quien es el cliente? Como lo recuerda?
+    se maneja un sistema de sesiones, para identificar al cliente.
+

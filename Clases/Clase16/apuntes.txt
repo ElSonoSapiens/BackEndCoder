@@ -1,2 +1,11 @@
 Clase 16 - Mongo Avanzado(parte I)
 
+  Indexacion 
+    Sirve para encontrar propiedades de los objetos con mayor rapidez.
+    Ideal para colecciones grandes
+
+  Population
+    poblar de informacion ciertas busquedas
+    Coloca un documento dentro de otro documento con el fin de obtener ambos en un sola busquedas
+
+     
