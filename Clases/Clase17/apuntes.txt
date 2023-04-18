@@ -4,5 +4,26 @@ Aggregation
     - agrupar documentos con base en un criterio especificado
     - Realizar alguna operacion sobre dichos documentos
     - analizar cambios de info con el paso del tiempo
+    - conjunto de pasos (stages) donde cada paso corresponderá una operación a realizar
+
+    Agregarion Pipeline - tubería
+
+    - count 
+    - group
+    - limit
+    - lookup
+    - stages
+    - set/addFields
+    - match
+    - skip
+    - sort
+
+-
+
+
+
+
+Paginacion
+
+
     
-    Pipeline - tubería

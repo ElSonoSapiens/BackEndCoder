@@ -60,9 +60,15 @@ socketServer.on('connection', async (socket) => {
 	console.log(products);
 
 	//PRODUCTS
-	socket.on('newProduct', (newProduct) => {
-		console.log(`Product added: ${newProduct}`);
-		productManager.addProduct({ ...newProduct });
+
+	// socket.on('newProduct', (newProduct) => {
+	// 	console.log(`Product added: ${newProduct}`);
+	// 	productManager.addProduct({ ...newProduct });
+	// });
+
+	socket.on('newProduct', async (newProduct) => {
+		await productManager.addProduct(newProduct);
+		socket.emit('products', products);
 	});
 
 	socket.on('deleteProduct', (productId) => {

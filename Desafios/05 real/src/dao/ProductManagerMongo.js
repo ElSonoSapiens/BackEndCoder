@@ -11,7 +11,7 @@ export default class ProductManager {
 	}
 
 	async getProductById(idProd) {
-		const productsFile = await this.getProducts().lean();
+		const productsFile = await this.getProducts();
 		const product = productsFile.find((p) => p.id === idProd);
 		if (product) {
 			return product;
@@ -21,7 +21,7 @@ export default class ProductManager {
 	}
 
 	async addProduct(product) {
-		const productsFile = await this.getProducts().lean();
+		const productsFile = await this.getProducts();
 		const id = this.#idGenerator(productsFile);
 		const newProduct = {
 			id,
@@ -56,7 +56,7 @@ export default class ProductManager {
 
 	async updateProduct(idProd, product) {
 		try {
-			const productsFile = await this.getProducts().lean();
+			const productsFile = await this.getProducts();
 			if (productsFile) {
 				await productsModel.findOneAndUpdate({ _id: idProd }, product);
 				const updatedProduct = await this.getProductById(idProd);
