@@ -35,10 +35,11 @@ addProduct.addEventListener('click', (e) => {
 		!newProduct.status ||
 		!newProduct.category
 	) {
-		e.preventDefault();
-		return console.log('Incompleted fields');
+		//e.preventDefault();
+		return console.log('Incompleted fields') + document.reload();
 	} else {
 		socketClient.emit('newProduct', newProduct);
+		document.location.reload();
 	}
 });
 
@@ -50,7 +51,8 @@ deleteProduct.addEventListener('click', (e) => {
 	const element = e.target;
 	const productId = element.getAttribute('data-id');
 	if (element.className === 'classDeleteProduct') {
-		socketClient.emit('deleteProduct', parseInt(productId));
+		socketClient.emit('deleteProduct', productId);
+		console.log(productId);
 		document.location.reload();
 	}
 });

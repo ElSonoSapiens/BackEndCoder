@@ -11,20 +11,25 @@ export default class ProductManager {
 	}
 
 	async getProductById(idProd) {
-		const productsFile = await this.getProducts();
-		const product = productsFile.find((p) => p.id === idProd);
-		if (product) {
-			return product;
-		} else {
-			return 'Product not found';
+		try {
+			const product = await productsModel.find({ _id: idProd });
+			if (product) {
+				return product;
+			} else {
+				throw new Error(`Producto con id ${id} no encontrado`);
+			}
+		} catch (error) {
+			console.log(
+				`Error al buscar producto con el id solicitado: ${error.message}`
+			);
 		}
 	}
 
 	async addProduct(product) {
 		const productsFile = await this.getProducts();
-		const id = this.#idGenerator(productsFile);
+		// const id = this.#idGenerator(productsFile);
 		const newProduct = {
-			id,
+			// id,
 			title: product.title,
 			description: product.description,
 			price: product.price,
@@ -48,8 +53,8 @@ export default class ProductManager {
 		) {
 			return 'Incompleted fields';
 		} else {
-			productsFile.push(newProduct);
-			await productsModel.create(productsFile);
+			// productsFile.push(newProduct);
+			const newProduct = await productsModel.create(product);
 			return newProduct;
 		}
 	}
@@ -78,20 +83,24 @@ export default class ProductManager {
 		}
 	}
 
-	async deleteProductById(idProd) {
-		const productsFile = await this.getProducts();
-		const productIndex = productsFile.findIndex((p) => p.id === idProd);
-		if (productIndex === -1) {
-			return "Product doesn't exist";
-		} else {
-			productsFile.splice(productIndex, 1);
-			await productsModel.deleteOne({ _id: idProd });
-			return 'Product deleted';
+	async deleteProductById(id) {
+		try {
+			const deletedProduct = await this.getProductById(id);
+			if (deletedProduct) {
+				await productsModel.deleteOne({ _id: id });
+				return 'Product deleted';
+			} else {
+				throw new Error(`Product ${id} doesn't exist`);
+			}
+		} catch (error) {
+			console.log(
+				`Error al eliminar el producto con el id solicitado: ${error.message}`
+			);
 		}
 	}
 
-	#idGenerator = (products) => {
-		let id = products.length === 0 ? 1 : products[products.length - 1].id + 1;
-		return id;
-	};
+	// #idGenerator = (products) => {
+	// 	let id = products.length === 0 ? 1 : products[products.length - 1].id + 1;
+	// 	return id;
+	// };
 }

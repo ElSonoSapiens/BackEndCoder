@@ -10,9 +10,14 @@ const router = Router();
 const cartManager = new CartManager();
 
 // crear carrito
+// router.post('/', async (req, res) => {
+// 	const newCart = await cartManager.createCart();
+// 	res.json = { cart: newCart };
+// });
+
 router.post('/', async (req, res) => {
-	const newCart = await cartManager.createCart();
-	res.json = { cart: newCart };
+	await cartManager.createCart();
+	res.status(201).json({ mensaje: 'Carrito creado con exito' });
 });
 
 // buscar carrito
@@ -28,5 +33,11 @@ router.post('/:cid/product/:pid', async (req, res) => {
 	const addProduct = await cartManager.addProductToCart(cid, pid);
 	res.json({ message: addProduct });
 });
+
+// router.post('/:cid/product/:pid', async (req, res) => {
+// 	const { cid, pid } = req.params;
+// 	const cart = await cartManager.addToCart(cid, pid);
+// 	!cart ? res.status(404).json(notFound) : res.status(200).json(cart);
+// });
 
 export default router;

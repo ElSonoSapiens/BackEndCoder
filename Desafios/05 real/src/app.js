@@ -53,7 +53,7 @@ socketServer.on('connection', async (socket) => {
 	const messages = await chatManager.getAllMessages();
 
 	socket.on(`disconnect`, () => {
-		console.log(`Client disconnected: ${socket.id}`); // log para cuando se cae la comunicación
+		console.log(`Client disconnected: ${socket.id}`); // log para cuando se cae la comunicación.
 	});
 
 	socket.emit('products', products);
@@ -71,12 +71,19 @@ socketServer.on('connection', async (socket) => {
 		socket.emit('products', products);
 	});
 
-	socket.on('deleteProduct', (productId) => {
-		console.log(`Product deleted ${productId}`);
-		productManager.deleteProductById(productId);
+	// socket.on('deleteProduct', async (productId) => {
+	// 	await productManager.deleteProductById(productId);
+	// 	console.log(`Product deleted ${productId}`);
+	// });
+
+	socket.on('deleteProduct', async (productId) => {
+		await productManager.deleteProductById(productId);
+		socket.emit('products', products);
+		console.log(productId);
 	});
 
 	//CHAT
+
 	socket.on('message', async (info) => {
 		infoMensajes.push(info);
 		socketServer.emit('chat', infoMensajes);
