@@ -14,6 +14,20 @@ export default class StudentsManager {
 		try {
 			const response = await studentsModel.aggregate([
 				{ $match: { calification: { $gt: 5 } } },
+				// { $count: 'cantidad' },
+				// { $match: { gender: 'Female' } },
+				// { $count: 'female_students_more_than_5' },
+				{
+					$group: {
+						_id: '$gender',
+						gender_count: { $count: {} },
+						promedio_calification: { $avg: '$calification' },
+					},
+				},
+				//	{ $sort: { promedio_calification: -1 } },
+				{ $sort: { gender_count: -1 } },
+				// { $count: 'final_count' },
+				{ $match: { gender_count: { $gte: 4 } } },
 			]);
 			return response;
 		} catch (error) {

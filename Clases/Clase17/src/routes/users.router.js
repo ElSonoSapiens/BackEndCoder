@@ -20,4 +20,9 @@ router.get('/add', async (req, res) => {
 	res.json({ message: 'Users added' });
 });
 
+router.get('/paginate', async (req, res) => {
+	const response = await usersManager.paginateFun();
+	res.json({ response });
+});
+
 export default router;

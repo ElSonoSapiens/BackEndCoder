@@ -19,4 +19,14 @@ export default class UsersManager {
 			console.log(error);
 		}
 	}
+
+	async paginateFun() {
+		try {
+			const result = await usersModel.paginate({}, {});
+
+			return result;
+		} catch (error) {
+			console.log(error);
+		}
+	}
 }
