@@ -21,8 +21,8 @@ router.get('/add', async (req, res) => {
 });
 
 router.get('/paginate', async (req, res) => {
-	const response = await usersManager.paginateFun();
+	const { limit = 15, page = 1 } = req.query;
+	const response = await usersManager.paginateFun(limit, page);
 	res.json({ response });
 });
-
 export default router;

@@ -20,11 +20,23 @@ export default class UsersManager {
 		}
 	}
 
-	async paginateFun() {
+	async paginateFun(limit, page) {
 		try {
-			const result = await usersModel.paginate({}, {});
-
-			return result;
+			const result = await usersModel.paginate(
+				{ gender: 'Male' },
+				{ limit, page }
+			); // limit => cantidad de objetos por busqueda, page => pagina en la que realiza la busqueda
+			const info = {
+				count: result.totalDocs,
+				page: result.totalPages,
+				next: result.hasNextPage
+					? `http://localhost:8080/users/paginate?page=${result.nextPage}`
+					: null,
+				prev: result.hasPrevPage
+					? `http://localhost:8080/users/paginate?page=${result.prevPage}`
+					: null,
+			};
+			return { info, results: result.docs };
 		} catch (error) {
 			console.log(error);
 		}
