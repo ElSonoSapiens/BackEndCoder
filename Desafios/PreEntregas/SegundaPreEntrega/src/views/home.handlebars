@@ -1,7 +1,7 @@
 <h2>Products</h2>
-{{#if products.length}}
+{{#if products.docs.length}}
 	<ul>
-		{{#each products}}
+		{{#each products.docs}}
 			<li>Id: {{_id}}</li>
 			<li>Product: {{title}}</li>
 			<li>Description: {{description}}</li>

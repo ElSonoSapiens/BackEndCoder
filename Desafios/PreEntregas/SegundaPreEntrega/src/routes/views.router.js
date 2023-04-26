@@ -1,27 +1,23 @@
 import { Router } from 'express';
 import ProductManager from '../dao/ProductManagerMongo.js';
+import CartManager from '../dao/CartManagerMongo.js';
 import { __dirname } from '../utils.js';
 
 const router = Router();
-const productManager = new ProductManager(__dirname + '/Products.json');
+// const productManager = new ProductManager(__dirname + '/Products.json');
+const productManager = new ProductManager();
+const cartManager = new CartManager();
 
+// Ruta para visualizar todos los productos listados
 router.get('/', async (req, res) => {
-	const products = await productManager.getProducts(2);
+	const products = await productManager.getProducts();
 	res.render('home', { products });
 });
 
+// Ruta para visualizar todos los productos en grilla
 router.get('/realtimeproducts', async (req, res) => {
-	const products = await productManager.getProducts(2);
+	const products = await productManager.getProducts();
 	res.render('realTimeProducts', { products });
-});
-
-// Ruta para visualizar todos los productos
-router.get('/products', async (req, res) => {
-	// const products = await productManager.getAll();
-	const products = await productManager.getProducts(2);
-	// console.log(products);
-
-	res.render('products', { products });
 });
 
 // Ruta para visualizar todos los productos con paginación
@@ -57,12 +53,12 @@ router.get('/products/:id', async (req, res) => {
 
 // Ruta para visualizar el carrito de compras
 router.get('/carts/:cid', async (req, res) => {
-	const cartManager = new CartManager();
-	const cart = await cartManager.getCartById(req.params.cid);
-
-	const { products } = cart;
-
-	res.render('cart', { products });
+	const { cid } = req.params;
+	const cart = await cartManager.getCart(cid);
+	res.render('cart', { cart });
+	console.log(cart.products);
+	// res.json({ cart });
+	// const { products } = cart;
 });
 
 export default router;

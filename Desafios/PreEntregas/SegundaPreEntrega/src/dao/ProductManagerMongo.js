@@ -41,8 +41,8 @@ export default class ProductManager {
 				lean: true,
 			};
 
-			const allProducts = await productsModel.paginate(search, options);
-			return allProducts;
+			const products = await productsModel.paginate(search, options);
+			return products;
 		} catch (error) {
 			console.log(error);
 		}
@@ -63,7 +63,7 @@ export default class ProductManager {
 	}
 
 	async addProduct(product) {
-		const productsFile = await this.getProducts();
+		// const productsFile = await this.getProducts();
 		// const id = this.#idGenerator(productsFile);
 		// const newProduct = {
 		// 	// id,
@@ -77,37 +77,56 @@ export default class ProductManager {
 		// 	category: product.category,
 		// };
 
-		if (productsFile.some((pCode) => pCode.code === product.code)) {
-			return 'Code already exist';
-		} else if (
-			!product.title ||
-			!product.description ||
-			!product.price ||
-			!product.code ||
-			!product.stock ||
-			!product.status ||
-			!product.category
-		) {
-			return 'Incompleted fields';
-		} else {
-			// productsFile.push(newProduct);
-			const newProduct = await productsModel.create(product);
+		// if (productsFile.some((pCode) => pCode.code === product.code)) {
+		// 	return 'Code already exist';
+		// } else if (
+		// 	!product.title ||
+		// 	!product.description ||
+		// 	!product.price ||
+		// 	!product.code ||
+		// 	!product.stock ||
+		// 	!product.status ||
+		// 	!product.category
+		// ) {
+		// 	return 'Incompleted fields';
+		// } else {
+		// 	// productsFile.push(newProduct);
+		// 	const newProduct = await productsModel.create(product);
+		// 	return newProduct;
+		// }
+		try {
+			const newProduct = new productsModel(product);
+			await newProduct.save();
 			return newProduct;
+		} catch (error) {
+			console.log(error);
 		}
 	}
 
 	async updateProduct(idProd, product) {
+		// try {
+		// 	const productsFile = await this.getProducts();
+		// 	if (productsFile) {
+		// 		await productsModel.findOneAndUpdate({ _id: idProd }, product);
+		// 		const updatedProduct = await this.getProductById(idProd);
+		// 		return updatedProduct + console.log('Product updated');
+		// 	} else {
+		// 		throw new Error(`Product not found`);
+		// 	}
+		// } catch (error) {
+		// 	console.log(`Error modifying product ${idProd}: ${error.message}`);
+		// }
 		try {
-			const productsFile = await this.getProducts();
-			if (productsFile) {
-				await productsModel.findOneAndUpdate({ _id: idProd }, product);
-				const updatedProduct = await this.getProductById(idProd);
-				return updatedProduct + console.log('Product updated');
-			} else {
-				throw new Error(`Product not found`);
-			}
+			const updatedProduct = await productsModel.findOneAndUpdate(
+				idProd,
+				product,
+				{
+					new: true,
+				}
+			);
+			return updatedProduct;
 		} catch (error) {
-			console.log(`Error modifying product ${idProd}: ${error.message}`);
+			console.log(error);
 		}
 	}
 

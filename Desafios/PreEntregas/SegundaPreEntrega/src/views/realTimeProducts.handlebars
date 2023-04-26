@@ -15,7 +15,7 @@
 		</tr>
 	</thead>
 	<tbody id='productsTable'>
-		{{#each products}}
+		{{#each products.docs}}
 			<tr>
 				<td> {{_id}}</td>
 				<td> {{title}}</td>
@@ -31,6 +31,7 @@
 						class='classDeleteProduct'
 						data-id='{{_id}}'
 					>Borrar</button></td>
+				<td><button class='agregarCarrito'>Agregar al carrito</button></td>
 			</tr>
 		{{/each}}
 	</tbody>

@@ -12,7 +12,7 @@ const inputStatus = document.getElementById('productStatus');
 const inputCategory = document.getElementById('productCategory');
 
 const products = socketClient.on('products', (products) => {
-	return products + console.log(products);
+	return products + console.log(products.docs);
 });
 
 addProduct.addEventListener('click', (e) => {

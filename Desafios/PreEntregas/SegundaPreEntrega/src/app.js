@@ -57,7 +57,7 @@ socketServer.on('connection', async (socket) => {
 	});
 
 	socket.emit('products', products);
-	console.log(products);
+	// console.log(products);
 
 	//PRODUCTS
 
@@ -79,7 +79,7 @@ socketServer.on('connection', async (socket) => {
 	socket.on('deleteProduct', async (productId) => {
 		await productManager.deleteProductById(productId);
 		socket.emit('products', products);
-		console.log(productId);
+		// console.log(productId);
 	});
 
 	//CHAT
