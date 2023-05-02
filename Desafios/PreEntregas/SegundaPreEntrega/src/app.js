@@ -96,3 +96,7 @@ socketServer.on('connection', async (socket) => {
 		socket.emit('chat', infoMensajes);
 	});
 });
+
+/*Hola Diego. Te hablo al respecto de la entrega: La ruta get api/products, funciona correcttamente. Encontré un error a la hora de modificar el producto, no me deja modificarlo porque se repite code, cosa que no debería preguntar ya que si debería tener el mismo code. Estaría bueno que se agregue un mensaje acorde en las rutas si no funciona o no se realiza lo que se desea en cada ruta.
+
+Estaría bueno que en la ruta post de api/carts, puedas responder con el id del carrito y un mensaje acorde de que creaste ese carrito. En la ruta put, que te deja modificar la cantidad de un producto, está buscando mal el parámetro que le estas pasando, tendrías que replantearlo en el manager. Revísalo y cualquier cosa me decís.*/

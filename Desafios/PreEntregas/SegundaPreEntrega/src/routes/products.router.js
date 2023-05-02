@@ -68,7 +68,7 @@ router.get('/', async (req, res) => {
 		console.error(err);
 		res
 			.status(500)
-			.send({ status: 'error', error: 'Error al obtener los productos' });
+			.send({ status: 'error', error: 'Error obtaining products' });
 	}
 });
 
@@ -79,33 +79,77 @@ router.get('/', async (req, res) => {
 // });
 
 router.get('/:pid', async (req, res) => {
-	const { pid } = req.params;
-	const product = await productManager.getProductById(pid);
-	res.json({ product });
+	try {
+		const { pid } = req.params;
+		const product = await productManager.getProductById(pid);
+		res.json({ product });
+
+		if (product) {
+			res.status(200).send({ status: 'success', payload: product });
+		} else {
+			res.status(404).send({ status: 'error', error: 'Product not found' });
+		}
+	} catch (error) {
+		console.log(error);
+		res.status(500).send({ status: 'error', error: 'Error obtaining product' });
+	}
 });
 
 router.post('/', async (req, res) => {
-	const obj = req.body;
-	const newProduct = await productManager.addProduct(obj);
-	res.json({ newProduct });
+	try {
+		const obj = req.body;
+		const newProduct = await productManager.addProduct(obj);
+		res.json({ newProduct });
+		if (newProduct) {
+			res.status(201).send({ status: 'success', payload: newProduct });
+		}
+	} catch (error) {
+		console.log(error);
+		res.status(500).send({ status: 'error', error: 'Error creating product' });
+	}
 });
 
 router.put('/:pid', async (req, res) => {
-	const { pid } = req.params;
-	const obj = req.body;
-	const product = await productManager.updateProduct(pid, obj);
-	res.json({ product });
+	try {
+		const { pid } = req.params;
+		const obj = req.body;
+		const product = await productManager.updateProduct(pid, obj);
+		res.json({ product });
+		if (product) {
+			res.status(201).send({ status: 'success', payload: updatedProduct });
+		} else {
+			res.status(404).send({ status: 'error', error: 'Product not found' });
+		}
+	} catch (error) {
+		console.log(error);
+		res.status(500).send({ status: 'error', error: 'Error updating product' });
+	}
 });
 
 router.delete('/', async (req, res) => {
-	const message = await productManager.deleteProducts();
-	res.json({ message });
+	try {
+		const deleteProducts = await productManager.deleteProducts();
+		res.json({ deleteProducts });
+	} catch (error) {
+		console.log(error);
+		res.status(500).send({ status: 'error', error: 'Error deleting products' });
+	}
 });
 
 router.delete('/:pid', async (req, res) => {
-	const { pid } = req.params;
-	const message = await productManager.deleteProductById(pid);
-	res.json({ message });
+	try {
+		const { pid } = req.params;
+		const deleteProduct = await productManager.deleteProductById(pid);
+		res.json({ deleteProduct });
+		if (deleteProduct) {
+			res.status(201).send({ status: 'success', payload: deleteProduct });
+		} else {
+			res.status(404).send({ status: 'error', error: 'Product not found' });
+		}
+	} catch (error) {
+		console.log(error);
+		res.status(500).send({ status: 'error', error: 'Error deleting product' });
+	}
 });
 
 export default router;
