@@ -2,18 +2,58 @@ npm init -y
 
 npm i nodemon
 npm i express express-handlebars socket.io mongoose
-npm i express express-handlebars mongoose
+ mongoose
 
-// app.js
-
+// Express
+npm i express
 import express from "express";
-import rutaX from "./routes/rutaX.router.js";
 
 const app = express();
-
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+// utils.js => __dirname
+
+import { dirname } from 'path';
+import { fileURLToPath } from 'url';
+
+export const __dirname = dirname(fileURLToPath(import.meta.url));
+
+import { __dirname } from '../src/utils.js';
+
+
+// Handlebars
+npm i express express-handlebars
+import handlebars from 'express-handlebars';
+
+app.engine('handlebars', handlebars.engine());
+app.set('views', __dirname + '/views');
+app.set('view engine', 'handlebars');
+
+
+// Cookies
+npm i cookie-parser 
+import cookieParser from 'cookie-parser';
+
+// Session
+npm i express-session 
+import session from "express-session"
+
+app.use(session({
+]))
+
+
+
+
+
+
+
+
+
+
+// Router
+
+import rutaX from "./routes/rutaX.router.js";
 app.get("/", (req,res)=>{})
 app.use("/", rutaX);
 
@@ -26,12 +66,7 @@ app.listen(PORT, () => {
 // En el objeto REQUEST va a viajar la informacion del cliente
 // En el objeto RESPONSE va a viajar la información desde el servidor al cliente
 
-// __dirname => utils.js
 
-import { dirname } from 'path';
-import { fileURLToPath } from 'url';
-
-export const __dirname = dirname(fileURLToPath(import.meta.url));
 
 // en app.js
 app.use(express.static(__dirname+"/public")) // archivos públicos/estáticos

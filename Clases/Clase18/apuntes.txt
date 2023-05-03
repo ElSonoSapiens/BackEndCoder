@@ -1,11 +1,18 @@
 Clase 18 - Cookies, Sessions & Storages
 
   Cookies
+    La informacion se guarda en pares clave:valor
     Archivos que se guardan en el navegador => facilmente accesible por multiples elementos externos
     almacena info dentro del navegador por ej: nombre usuario, ID de sesion, preferencias de pagina
     NO almacena informacion delicada
     NO afecta al cliente
 
+  Caracteristicas
+    Se les puede configurar un tiempo de vida
+    El espacio con el que se cuenta es limitado, se recomienda elegir de forma adecuada lo que se vaya a guardar como cookie
+    Se puede asignarles claves secretas para poder aumentar la seguridad
+
+  Comenzandoa utilizar cookies
     npm i cookie-parser
 
     Se puede modificar la cookie desde el navegador y el servidor no tiene forma de saberlo
@@ -16,5 +23,15 @@ Clase 18 - Cookies, Sessions & Storages
     Conexion sin estado => ejecutar una peticion, el servidor responde y muere todo ahi.
     Al servidor no le intersa lo que parse
     Si el servidor no sabe quien ejecuta la peticion, como hace para saber quien es el cliente? Como lo recuerda?
-    se maneja un sistema de sesiones, para identificar al cliente.
+    Se maneja un sistema de sesiones, para identificar al cliente => Login y SingUp => usuario coloca sus credenciales.
+    Copiamos las credenciales que el cliente coloca en el LogIn o SingUp y les asignamos un id que enviamos por cookies al navegador.
+
+    req.session
+      Siempre se guarda del lado del servidor
+      Del lado del lciente se crea un id único
+      Lo datos de session se borran al cerrar el navegador
+      Principalmente guarda los datos del usuario al iniciar sesion
+
+      npm i express-session
+
 
