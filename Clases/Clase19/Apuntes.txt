@@ -1,2 +1,5 @@
 Clase 19 - Cookies, Session & Storage II
 
+  Utilizando FileStorage en nuestro servidor
+  npm i express express-session session-file-store
+  import FileStore from 'session-file-store';

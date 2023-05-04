@@ -39,24 +39,24 @@ import cookieParser from 'cookie-parser';
 npm i express-session 
 import session from "express-session"
 
-app.use(session({
-]))
+app.use(session({}))
 
-
-
-
-
-
-
-
+// Session File Store
+  npm i session-file-store
+	
+import FileStore from 'session-file-store';
 
 
 // Router
+import { Router } from 'express';
+const router = Router();
+export default router;
 
 import rutaX from "./routes/rutaX.router.js";
 app.get("/", (req,res)=>{})
 app.use("/", rutaX);
 
+// PORT
 const PORT = 8080;
 
 app.listen(PORT, () => {
