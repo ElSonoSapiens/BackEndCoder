@@ -46,6 +46,16 @@ app.use(session({}))
 	
 import FileStore from 'session-file-store';
 
+// Connect mongo
+	npm i connect-mongo
+
+
+
+
+
+
+-------------
+
 
 // Router
 import { Router } from 'express';

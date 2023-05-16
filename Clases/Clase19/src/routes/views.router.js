@@ -8,12 +8,27 @@ router.get('/', (req, res) => {
 });
 */
 
+// router.get('/', (req, res) => {
+// 	if (req.session.username) {
+// 		res.redirect('/users/prueba'); // Si hay una sesion ejecutandose, redirecciona a la bienvenida
+// 		return; // si se cumple la condicion, se ejecuta el bloque y no continúa leyendo
+// 	}
+// 	res.render('login');
+// });
+
+// Renderizar la vista login a ingresar al endpoint "/"
 router.get('/', (req, res) => {
-	if (req.session.username) {
-		res.redirect('/users/prueba'); // Si hay una sesion ejecutandose, redirecciona a la bienvenida
-		return; // si se cumple la condicion, se ejecuta el bloque y no continúa leyendo
-	}
 	res.render('login');
+});
+
+// Renderizar la vista registro a ingresar al endpoint "/registro"
+router.get('/registro', (req, res) => {
+	res.render('registro');
+});
+
+// Renderizar la vista errorRegistro a ingresar al endpoint "/"
+router.get('/errorRegistro', (req, res) => {
+	res.render('errorRegistro');
 });
 
 export default router;
