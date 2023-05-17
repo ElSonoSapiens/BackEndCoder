@@ -1,4 +1,4 @@
-import { userModel } from '../models/users.model.js';
+import { userModel } from '../db/models/users.model.js';
 
 // creamos clase para exportar funcionalidades
 export default class UsersManager {
@@ -27,7 +27,6 @@ export default class UsersManager {
 	async loginUser(user) {
 		const { email, password } = user;
 		const usuario = await userModel.find({ email, password });
-
 		if (usuario.lenght !== 0) {
 			return usuario;
 		} else {

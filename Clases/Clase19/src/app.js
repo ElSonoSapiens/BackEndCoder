@@ -56,7 +56,6 @@ app.use(
 		},
 	})
 );
-//min 48 del otro video
 
 // Routes
 app.use('/views', viewsRouter);
