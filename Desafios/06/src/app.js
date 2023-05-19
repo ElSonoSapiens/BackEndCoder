@@ -26,6 +26,22 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(__dirname + '/public'));
 
+// Mongo session
+app.use(
+	session({
+		// dónde se guardará la session
+		store: new mongoStore({
+			// config para conectarse a la DB
+			mongoUrl:
+				'mongodb+srv://elSonoSapiens:2xyjhtHqPvGEOdZG@cluster0.eu8lqfi.mongodb.net/ecommerce?retryWrites=true&w=majority',
+		}),
+		secret: 'SessionKey',
+		cookie: {
+			maxAge: 6000, // tiempo de vida de la credencial del usuario. Una vez pasado el tiempo, se pierde la credencial del usuario y deberá volver a indentificarse
+		},
+	})
+);
+
 // PORT
 const PORT = 8080;
 // HTTP Server
@@ -105,19 +121,3 @@ socketServer.on('connection', async (socket) => {
 
 // Cookies
 app.use(cookieParser());
-
-// Mongo session
-app.use(
-	session({
-		// dónde se guardará la session
-		store: new mongoStore({
-			// config para conectarse a la DB
-			mongoUrl:
-				'mongodb+srv://elSonoSapiens:2xyjhtHqPvGEOdZG@cluster0.eu8lqfi.mongodb.net/ecommerce?retryWrites=true&w=majority',
-		}),
-		secret: 'SessionKey',
-		cookie: {
-			maxAge: 6000, // tiempo de vida de la credencial del usuario. Una vez pasado el tiempo, se pierde la credencial del usuario y deberá volver a indentificarse
-		},
-	})
-);

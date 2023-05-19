@@ -7,16 +7,23 @@ export default class UsersManager {
 		const { email } = user;
 		try {
 			// lo primero es chequear si existe el usuario
-			const existeUsuario = await userModel.find({
+			const existeUsuario = await userModel.findOne({
 				email,
 			});
 			// si no existe el usuario, lo crea
-			if (existeUsuario.lenght !== 0) {
-				const newUser = await userModel.create(user);
-				return newUser; //
+			if (existeUsuario) {
+				throw new Error(`El usuario ${email} ya existe`);
 			} else {
-				// Si existe, retorna null
-				return null;
+				console.log(user);
+				const { email, password } = user;
+				user.role = (await this.isAdmin({ email, password }))
+					? 'admin'
+					: 'usuario';
+				const newUser = await userModel.create({
+					...user,
+					password,
+				});
+				return newUser;
 			} //
 		} catch (error) {
 			console.log(error);
@@ -24,10 +31,13 @@ export default class UsersManager {
 		}
 	}
 
-	async loginUser(user) {
-		const { email, password } = user;
-		const usuario = await userModel.find({ email, password });
-		if (usuario.lenght !== 0) {
+	isAdmin({ email, password }) {
+		return email === 'adminCoder@coder.com' && password === 'adminCod3r123';
+	}
+
+	async loginUser({ email, password }) {
+		const usuario = await userModel.findOne({ email, password });
+		if (usuario) {
 			return usuario;
 		} else {
 			return null;

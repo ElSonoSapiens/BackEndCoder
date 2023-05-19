@@ -19,7 +19,8 @@ router.get('/', async (req, res) => {
 // Ruta para visualizar todos los productos en grilla
 router.get('/realtimeproducts', async (req, res) => {
 	const products = await productManager.getProducts();
-	res.render('realTimeProducts', { products });
+	console.log(req.session);
+	res.render('realTimeProducts', { products, user: req.session });
 });
 
 // Ruta para visualizar todos los productos con paginación

@@ -3,14 +3,6 @@ import UsersManager from '../dao/UsersManager.js';
 const router = Router();
 const usersManager = new UsersManager();
 
-// array con usuarios y contraseñas
-// const users = [
-// 	{
-// 		email: "adminCoder@coder.com",
-// 		password: 'adminCod3r123',
-// 	},
-// ];
-
 // MongoStore
 router.post('/', async (req, res) => {
 	const { email, password } = req.body;
@@ -26,7 +18,6 @@ router.post('/', async (req, res) => {
 
 // Solo nos deja acceder cuando exista la sesion
 router.get('/prueba', (req, res) => {
-	console.log('session', req.session);
 	if (req.session?.email) {
 		res.send(`Bienvenido ${req.session.email}`);
 		return;
@@ -37,9 +28,10 @@ router.get('/prueba', (req, res) => {
 });
 
 router.get('/logout', (req, res) => {
-	req.session.destroy(() => {
+	req.session.destroy((err) => {
+		if (err) return next(err);
 		res.redirect('/views');
-	}); // Destruimos la session y ejecutamos un callback (funcion flecha) que redireccione hacia otro endpoint
+	});
 });
 
 router.post('/registro', async (req, res) => {
@@ -53,13 +45,13 @@ router.post('/registro', async (req, res) => {
 
 router.post('/login', async (req, res) => {
 	const { email, password } = req.body;
-	const user = await usersManager.loginUser(req.body);
-	if (user) {
-		req.session.email = email;
-		req.session.password = password;
-		req.redirect('/views/realtimeproducts');
+	const authorized = await usersManager.loginUser({ email, password });
+	if (!authorized) {
+		res.redirect('/views/errorLogin');
 	} else {
-		req.redirect('/views/errorLogin');
+		req.session.email = authorized.email;
+		req.session.role = authorized.role;
+		res.redirect('/views/realtimeproducts');
 	}
 });
 

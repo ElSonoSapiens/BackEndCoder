@@ -56,3 +56,11 @@ deleteProduct.addEventListener('click', (e) => {
 		document.location.reload();
 	}
 });
+
+const logout = document.querySelector('#logout');
+
+logout.addEventListener('click', (e) => {
+	e.preventDefault();
+	fetch('/users/logout');
+	window.location.href = '/views';
+});

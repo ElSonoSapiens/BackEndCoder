@@ -1,5 +1,5 @@
 <h2>Products (Real Time)</h2>
-<h3>Welcome user</h3>
+<h3>Welcome {{user.email}}</h3>
 
 <table border='1'>
 	<thead>
@@ -69,6 +69,8 @@
 
 	<button type='submit' id='addProduct'>Agregar</button>
 </form>
+
+<button id='logout'>Logout</button>
 
 <script src='/socket.io/socket.io.js'></script>
 <script src='/js/index.js'></script>
