@@ -1,0 +1,6 @@
+Clase 20 Autorización y autenticación
+
+  - comprender diferencia entre Autorización y autenticación
+  - dif metodos de autenticacion
+  - proteger password mediante hasheo
+  - crear estrategia locar con passport-local

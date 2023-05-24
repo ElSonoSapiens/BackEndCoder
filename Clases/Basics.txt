@@ -49,7 +49,14 @@ import FileStore from 'session-file-store';
 // Connect mongo
 	npm i connect-mongo
 
+// Bcrypt
+	npm install bcrypt
+	import bcrypt from "bcrypt"
 
+// Passport
+	npm i passport passport-local
+	import passport from "passport"
+	import local from "passport-local"
 
 
 
