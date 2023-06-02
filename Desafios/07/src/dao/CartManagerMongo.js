@@ -23,7 +23,7 @@ export default class CartManager {
 			const carts = await cartsModel.find().populate('products.product');
 			return carts;
 		} catch (error) {
-			console.log(error);
+			//console.log(error);
 		}
 	}
 
@@ -72,7 +72,7 @@ export default class CartManager {
 			}
 			return cart;
 		} catch (error) {
-			console.log(`Error agregando producto al carrito: ${error.message}`);
+			//console.log(`Error agregando producto al carrito: ${error.message}`);
 		}
 	}
 
@@ -86,7 +86,7 @@ export default class CartManager {
 				return 'Carrito eliminado correctamente';
 			}
 		} catch (error) {
-			console.log(`Error eliminando el carrito: ${error.message}`);
+			//console.log(`Error eliminando el carrito: ${error.message}`);
 		}
 	}
 
@@ -116,7 +116,7 @@ export default class CartManager {
 
 			return cart;
 		} catch (error) {
-			console.log(error);
+			//console.log(error);
 		}
 	}
 
@@ -140,7 +140,7 @@ export default class CartManager {
 	// 			return cart;
 	// 		}
 	// 	} catch (error) {
-	// 		console.log(`Error eliminando producto del carrito: ${error.message}`);
+	// 		//console.log(`Error eliminando producto del carrito: ${error.message}`);
 	// 	}
 	// }
 
@@ -157,7 +157,7 @@ export default class CartManager {
 
 			return cart;
 		} catch (error) {
-			console.log(error);
+			//console.log(error);
 		}
 	}
 
@@ -182,7 +182,7 @@ export default class CartManager {
 
 			return cart;
 		} catch (error) {
-			console.log(error);
+			//console.log(error);
 		}
 	}
 
@@ -206,7 +206,7 @@ export default class CartManager {
 
 			return cart;
 		} catch (error) {
-			console.log(error);
+			//console.log(error);
 		}
 	}
 }

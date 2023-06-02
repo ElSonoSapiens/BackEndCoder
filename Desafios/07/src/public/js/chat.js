@@ -46,7 +46,7 @@ function validator(message) {
 }
 
 socketClient.on('chat', (mensajes) => {
-	//	console.log(mensajes);
+	//	//console.log(mensajes);
 	const chatParrafo = mensajes
 		.map((obj) => {
 			return `<p>${obj.user}: ${obj.message} </p>`;

@@ -1,4 +1,4 @@
-import { userModel } from '../db/models/users.model.js';
+import { usersModel } from '../db/models/users.model.js';
 
 // creamos clase para exportar funcionalidades
 export default class UsersManager {
@@ -7,28 +7,32 @@ export default class UsersManager {
 		const { email } = user;
 		try {
 			// lo primero es chequear si existe el usuario
-			const existeUsuario = await userModel.findOne({
+			const existeUsuario = await usersModel.findOne({
 				email,
 			});
 			// si no existe el usuario, lo crea
 			if (existeUsuario) {
 				throw new Error(`El usuario ${email} ya existe`);
 			} else {
-				console.log(user);
+				// //console.log(user);
 				const { email, password } = user;
 				user.role = (await this.isAdmin({ email, password }))
 					? 'admin'
 					: 'usuario';
-				const newUser = await userModel.create({
+				const newUser = await usersModel.create({
 					...user,
 					password,
 				});
 				return newUser;
 			} //
 		} catch (error) {
-			console.log(error);
+			// //console.log(error);
 			throw new Error(error);
 		}
+	}
+
+	async findUserByEmail(email) {
+		return await usersModel.findOne({ email });
 	}
 
 	isAdmin({ email, password }) {
@@ -36,7 +40,7 @@ export default class UsersManager {
 	}
 
 	async loginUser({ email, password }) {
-		const usuario = await userModel.findOne({ email, password });
+		const usuario = await usersModel.findOne({ email, password });
 		if (usuario) {
 			return usuario;
 		} else {

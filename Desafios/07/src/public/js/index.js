@@ -12,7 +12,8 @@ const inputStatus = document.getElementById('productStatus');
 const inputCategory = document.getElementById('productCategory');
 
 const products = socketClient.on('products', (products) => {
-	return products + console.log(products.docs);
+	console.log(products.docs);
+	return products;
 });
 
 addProduct.addEventListener('click', (e) => {
@@ -36,7 +37,7 @@ addProduct.addEventListener('click', (e) => {
 		!newProduct.category
 	) {
 		//e.preventDefault();
-		return console.log('Incompleted fields') + document.reload();
+		return; //console.log('Incompleted fields') + document.reload();
 	} else {
 		socketClient.emit('newProduct', newProduct);
 		document.location.reload();
@@ -52,7 +53,7 @@ deleteProduct.addEventListener('click', (e) => {
 	const productId = element.getAttribute('data-id');
 	if (element.className === 'classDeleteProduct') {
 		socketClient.emit('deleteProduct', productId);
-		console.log(productId);
+		//console.log(productId);
 		document.location.reload();
 	}
 });

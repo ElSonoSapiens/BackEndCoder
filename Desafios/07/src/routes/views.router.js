@@ -19,7 +19,7 @@ router.get('/', async (req, res) => {
 // Ruta para visualizar todos los productos en grilla
 router.get('/realtimeproducts', async (req, res) => {
 	const products = await productManager.getProducts();
-	console.log(req.session);
+	//console.log(req.session);
 	res.render('realTimeProducts', { products, user: req.session });
 });
 
@@ -28,7 +28,7 @@ router.get('/products/page/:page', async (req, res) => {
 	const page = req.params.page || 1;
 
 	const products = await productManager.getProducts(2, page);
-	// console.log(products);
+	// //console.log(products);
 
 	res.render('products', { products });
 });
@@ -37,7 +37,7 @@ router.get('/products/page/:page', async (req, res) => {
 router.get('/products/:id', async (req, res) => {
 	const product = await productManager.getProductById(req.params.id);
 
-	// console.log(product);
+	// //console.log(product);
 
 	const { _id, title, description, price, code, stock, category, thumbnail } =
 		product;
@@ -59,7 +59,7 @@ router.get('/carts/:cid', async (req, res) => {
 	const { cid } = req.params;
 	const cart = await cartManager.getCart(cid);
 	res.render('cart', { cart });
-	console.log(cart.products);
+	//console.log(cart.products);
 	// res.json({ cart });
 	// const { products } = cart;
 });

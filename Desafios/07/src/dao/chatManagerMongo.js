@@ -6,7 +6,7 @@ export default class ChatManager {
 			const allMessages = await messagesModel.find();
 			return allMessages;
 		} catch (error) {
-			console.log(`Error obteniendo todos los mensajes: ${error.message}`);
+			//console.log(`Error obteniendo todos los mensajes: ${error.message}`);
 		}
 	}
 
@@ -15,7 +15,7 @@ export default class ChatManager {
 			const message = await messagesModel.create(objMessage);
 			return message;
 		} catch (error) {
-			console.log(`Error agregando mensaje: ${error.message}`);
+			//console.log(`Error agregando mensaje: ${error.message}`);
 		}
 	}
 
@@ -24,7 +24,7 @@ export default class ChatManager {
 			const message = await messagesModel.deleteOne({ _id: id });
 			return message;
 		} catch (error) {
-			console.log(`Error eliminando mensaje: ${error.message}`);
+			//console.log(`Error eliminando mensaje: ${error.message}`);
 		}
 	}
 }

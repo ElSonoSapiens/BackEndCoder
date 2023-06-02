@@ -90,7 +90,7 @@ router.get('/:pid', async (req, res) => {
 			res.status(404).send({ status: 'error', error: 'Product not found' });
 		}
 	} catch (error) {
-		console.log(error);
+		//console.log(error);
 		res.status(500).send({ status: 'error', error: 'Error obtaining product' });
 	}
 });
@@ -104,7 +104,7 @@ router.post('/', async (req, res) => {
 			res.status(201).send({ status: 'success', payload: newProduct });
 		}
 	} catch (error) {
-		console.log(error);
+		//console.log(error);
 		res.status(500).send({ status: 'error', error: 'Error creating product' });
 	}
 });
@@ -121,7 +121,7 @@ router.put('/:pid', async (req, res) => {
 			res.status(404).send({ status: 'error', error: 'Product not found' });
 		}
 	} catch (error) {
-		console.log(error);
+		//console.log(error);
 		res.status(500).send({ status: 'error', error: 'Error updating product' });
 	}
 });
@@ -131,7 +131,7 @@ router.delete('/', async (req, res) => {
 		const deleteProducts = await productManager.deleteProducts();
 		res.json({ deleteProducts });
 	} catch (error) {
-		console.log(error);
+		//console.log(error);
 		res.status(500).send({ status: 'error', error: 'Error deleting products' });
 	}
 });
@@ -147,7 +147,7 @@ router.delete('/:pid', async (req, res) => {
 			res.status(404).send({ status: 'error', error: 'Product not found' });
 		}
 	} catch (error) {
-		console.log(error);
+		//console.log(error);
 		res.status(500).send({ status: 'error', error: 'Error deleting product' });
 	}
 });

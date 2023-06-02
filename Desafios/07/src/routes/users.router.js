@@ -2,30 +2,128 @@ import { Router } from 'express';
 import UsersManager from '../dao/UsersManager.js';
 const router = Router();
 const usersManager = new UsersManager();
+import { hashData, compareData } from '../utils.js';
+import passport from 'passport';
 
-// MongoStore
-router.post('/', async (req, res) => {
-	const { email, password } = req.body;
-	const user = await usersModel.findOne({ email, password });
-	if (!user) {
-		return res.json({ message: 'user not found' });
-	}
-	req.session['username'] = email;
-	req.session['password'] = password;
-	req.session['logged'] = true;
-	res.json({ message: 'user found' });
-});
+//
+// MONGOSTORE
+//
 
-// Solo nos deja acceder cuando exista la sesion
-router.get('/prueba', (req, res) => {
-	if (req.session?.email) {
-		res.send(`Bienvenido ${req.session.email}`);
-		return;
-	}
-	// si alguien ya se encuentra logueado, no debería volver a loguearse, en consecuencia, deberíamos redireccionarlo a otro endpoint
-	// res.redirect('No autorizado') // muestra este mensaje si el usuario que se coloca en login no se encuentra en el array users
-	res.redirect('/views'); // si el usuario que se coloca en login no se encuentra en el array users, redirecciona al endpoint de views (donde se encuentra el formulario de login)
-});
+// router.post('/', async (req, res) => {
+// 	const { email, password } = req.body;
+// 	const user = await usersModel.findOne({ email, password });
+// 	if (!user) {
+// 		return res.json({ message: 'user not found' });
+// 	}
+// 	req.session['username'] = email;
+// 	req.session['password'] = password;
+// 	req.session['logged'] = true;
+// 	res.json({ message: 'user found' });
+// });
+
+//
+// REGISTRO
+//
+
+router.post(
+	'/registro',
+	passport.authenticate('registro', {
+		failureRedirect: '/views/errorRegistro',
+		successRedirect: '/views',
+	})
+);
+
+// router.post('/registro', passport.authenticate('registro'), (req, res) => {
+// 	//console.log(req.user);
+// 	res.send('User created');
+// });
+
+// router.post('/registro', async (req, res) => {
+// 	const newUser = await usersManager.createUser(req.body);
+// 	if (newUser) {
+// 		res.redirect('/views');
+// 	} else {
+// 		res.redirect('/views/errorRegistro');
+// 	}
+// });
+
+// router.post('/registro', async (req, res) => {
+// 	const user = req.body;
+// 	const hashPassword = await hashData(user.password); // metodo para hashear la contraseá
+// 	const newUser = { ...user, password: hashPassword };
+// 	await usersManager.createUser(newUser);
+// 	if (newUser) {
+// 		res.redirect('/views');
+// 	} else {
+// 		res.redirect('/views/errorRegistro');
+// 	}
+// });
+
+//
+// LOGIN
+//
+
+router.post(
+	'/login',
+	passport.authenticate('login', {
+		failureRedirect: '/views/errorLogin',
+		successRedirect: '/views/realtimeproducts',
+	})
+);
+
+// router.post('/login', async (req, res) => {
+// 	const { email, password } = req.body;
+// 	//
+// 	const authorized = await usersManager.loginUser({ email, password });
+// 	if (!authorized) {
+// 		res.redirect('/views/errorLogin');
+// 	}
+// 	// Tengo problemas con esto
+// 	const isPassword = await compareData(password, email.password);
+// 	if (!isPassword) {
+// 		res.redirect('/views/errorLogin');
+// 	} else {
+// 		req.session.email = authorized.email;
+// 		req.session.role = authorized.role;
+// 		res.redirect('/views/realtimeproducts');
+// 	}
+// });
+
+// router.post('/login', async (req, res) => {
+// 	const { email, password } = req.body;
+// 	const user = await usersManager.loginUser(req.body);
+
+// 	if (!user) {
+// 		return res.json({ message: 'not found' });
+// 	}
+// 	const isPassword = await compareData(password, user.password);
+// 	if (!isPassword) {
+// 		res.json({ message: 'password not found ' });
+// 	}
+// 	if (user) {
+// 		req.session.email = email;
+// 		req.session.password = password;
+// 		res.redirect('/views/perfil');
+// 	} else {
+// 		res.redirect('/views/errorLogin');
+// 	}
+// });
+
+//
+// GITHUB
+//
+
+router.post(
+	'/registro',
+	passport.authenticate('github', {
+		failureRedirect: '/views/errorLogin',
+		successRedirect: '/views/realtimeproducts',
+	})
+);
+
+//
+// LOGOUT
+//
 
 router.get('/logout', (req, res) => {
 	req.session.destroy((err) => {
@@ -33,26 +131,4 @@ router.get('/logout', (req, res) => {
 		res.redirect('/views');
 	});
 });
-
-router.post('/registro', async (req, res) => {
-	const newUser = await usersManager.createUser(req.body);
-	if (newUser) {
-		res.redirect('/views');
-	} else {
-		res.redirect('/views/errorRegistro');
-	}
-});
-
-router.post('/login', async (req, res) => {
-	const { email, password } = req.body;
-	const authorized = await usersManager.loginUser({ email, password });
-	if (!authorized) {
-		res.redirect('/views/errorLogin');
-	} else {
-		req.session.email = authorized.email;
-		req.session.role = authorized.role;
-		res.redirect('/views/realtimeproducts');
-	}
-});
-
 export default router;

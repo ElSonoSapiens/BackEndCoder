@@ -1,4 +1,4 @@
-import fs, { existsSync } from "fs";
+import fs, { existsSync } from 'fs';
 
 export default class ProductManager {
 	constructor(path) {
@@ -7,10 +7,10 @@ export default class ProductManager {
 
 	async getProducts() {
 		if (fs.existsSync(this.path)) {
-			const products = await fs.promises.readFile(this.path, "utf-8");
+			const products = await fs.promises.readFile(this.path, 'utf-8');
 			return JSON.parse(products);
 		} else {
-			console.log("file doesn't exist");
+			//console.log("file doesn't exist");
 			return [];
 		}
 	}
@@ -21,7 +21,7 @@ export default class ProductManager {
 		if (product) {
 			return product;
 		} else {
-			return "Product not found";
+			return 'Product not found';
 		}
 	}
 
@@ -42,9 +42,17 @@ export default class ProductManager {
 		};
 
 		if (productsFile.some((pCode) => pCode.code === product.code)) {
-			return "Code already exist";
-		} else if (!product.title || !product.description || !product.price || !product.code || !product.stock || !product.status || !product.category) {
-			return "Incompleted fields";
+			return 'Code already exist';
+		} else if (
+			!product.title ||
+			!product.description ||
+			!product.price ||
+			!product.code ||
+			!product.stock ||
+			!product.status ||
+			!product.category
+		) {
+			return 'Incompleted fields';
 		} else {
 			productsFile.push(newProduct);
 			await fs.promises.writeFile(this.path, JSON.stringify(productsFile));
@@ -56,22 +64,22 @@ export default class ProductManager {
 		const productsFile = await this.getProducts();
 		const product = productsFile.find((p) => p.id === idProd);
 		if (!product) {
-			return "Product not found";
+			return 'Product not found';
 		} else {
 			const updatedProduct = { ...product, ...obj };
 			const productIndex = productsFile.findIndex((p) => p.id === idProd);
 			productsFile.splice(productIndex, 1, updatedProduct);
 			await fs.promises.writeFile(this.path, JSON.stringify(productsFile));
-			return "Product updated";
+			return 'Product updated';
 		}
 	}
 
 	async deleteProducts() {
 		if (existsSync(this.path)) {
 			await fs.promises.unlink(this.path);
-			return "Products deleted";
+			return 'Products deleted';
 		} else {
-			return "No products found";
+			return 'No products found';
 		}
 	}
 
@@ -83,7 +91,7 @@ export default class ProductManager {
 		} else {
 			productsFile.splice(productIndex, 1);
 			await fs.promises.writeFile(this.path, JSON.stringify(productsFile));
-			return "Product deleted";
+			return 'Product deleted';
 		}
 	}
 

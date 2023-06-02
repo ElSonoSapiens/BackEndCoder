@@ -25,7 +25,7 @@ router.post('/', async (req, res) => {
 			payload: cart,
 		});
 	} catch (error) {
-		console.log(error);
+		//console.log(error);
 		res.status(500).send({
 			status: 'error',
 			error: `Error creating cart with ID ${cart._id}`,
@@ -43,7 +43,7 @@ router.get('/', async (req, res) => {
 			res.status(404).send({ status: 'error', error: 'Carts not found' });
 		}
 	} catch (error) {
-		console.log(error);
+		//console.log(error);
 		res.status(500).send({ status: 'error', error: 'Error obtaining carts' });
 	}
 });
@@ -65,7 +65,7 @@ router.get('/:cid', async (req, res) => {
 				.send({ status: 'error', error: `Cart with ID ${cid} not found` });
 		}
 	} catch (error) {
-		console.log(error);
+		//console.log(error);
 		res
 			.status(500)
 			.send({ status: 'error', error: `Error obtaining cart with ID ${cid}` });
@@ -90,7 +90,7 @@ router.post('/:cid/products/:pid', async (req, res) => {
 			});
 		}
 	} catch (error) {
-		console.log(error);
+		//console.log(error);
 		res.status(500).send({
 			status: 'error',
 			error: `Error adding product ${pid} to Cart ${cid}`,

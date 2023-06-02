@@ -14,6 +14,9 @@ import session from 'express-session';
 import cookieParser from 'cookie-parser';
 import mongoStore from 'connect-mongo';
 import usersRouter from './routes/users.router.js';
+// passport
+import '../passport/passportStrategies.js';
+import passport from 'passport';
 
 const app = express();
 //const productManager = new ProductManager(__dirname + "/Products.json");
@@ -25,6 +28,13 @@ const chatManager = new ChatManager();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(__dirname + '/public'));
+
+// PORT
+const PORT = 8080;
+// HTTP Server
+const httpServer = app.listen(PORT, () => {
+	//console.log(`escuchando al puerto ${PORT}`);
+});
 
 // Mongo session
 app.use(
@@ -42,18 +52,16 @@ app.use(
 	})
 );
 
-// PORT
-const PORT = 8080;
-// HTTP Server
-const httpServer = app.listen(PORT, () => {
-	console.log(`escuchando al puerto ${PORT}`);
-});
-
 // HANDLEBARS
 app.engine('handlebars', handlebars.engine());
 
 app.set('views', __dirname + '/views');
 app.set('view engine', 'handlebars');
+
+// config passport
+
+app.use(passport.initialize()); // para inicializar passport
+app.use(passport.session()); // para que trabaje con sesiones
 
 // ROUTES
 app.use('/api/products', productsRouter);
@@ -70,21 +78,21 @@ const infoMensajes = [];
 const socketServer = new Server(httpServer);
 
 socketServer.on('connection', async (socket) => {
-	console.log(`Client connected: ${socket.id}`);
+	//console.log(`Client connected: ${socket.id}`);
 	const products = await productManager.getProducts();
 	const messages = await chatManager.getAllMessages();
 
 	socket.on(`disconnect`, () => {
-		console.log(`Client disconnected: ${socket.id}`); // log para cuando se cae la comunicación.
+		//console.log(`Client disconnected: ${socket.id}`); // log para cuando se cae la comunicación.
 	});
 
 	socket.emit('products', products);
-	// console.log(products);
+	// //console.log(products);
 
 	//PRODUCTS
 
 	// socket.on('newProduct', (newProduct) => {
-	// 	console.log(`Product added: ${newProduct}`);
+	// 	//console.log(`Product added: ${newProduct}`);
 	// 	productManager.addProduct({ ...newProduct });
 	// });
 
@@ -95,13 +103,13 @@ socketServer.on('connection', async (socket) => {
 
 	// socket.on('deleteProduct', async (productId) => {
 	// 	await productManager.deleteProductById(productId);
-	// 	console.log(`Product deleted ${productId}`);
+	// 	//console.log(`Product deleted ${productId}`);
 	// });
 
 	socket.on('deleteProduct', async (productId) => {
 		await productManager.deleteProductById(productId);
 		socket.emit('products', products);
-		// console.log(productId);
+		// //console.log(productId);
 	});
 
 	//CHAT

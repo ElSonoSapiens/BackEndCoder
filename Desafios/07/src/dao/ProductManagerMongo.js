@@ -6,7 +6,7 @@ export default class ProductManager {
 	// 		const products = await productsModel.find().lean();
 	// 		return products;
 	// 	} catch (error) {
-	// 		console.log(error);
+	// 		//console.log(error);
 	// 	}
 	// }
 
@@ -44,7 +44,7 @@ export default class ProductManager {
 			const products = await productsModel.paginate(search, options);
 			return products;
 		} catch (error) {
-			console.log(error);
+			//console.log(error);
 		}
 	}
 	async getProductById(idProd) {
@@ -99,7 +99,7 @@ export default class ProductManager {
 			await newProduct.save();
 			return newProduct;
 		} catch (error) {
-			console.log(error);
+			//console.log(error);
 		}
 	}
 
@@ -109,12 +109,12 @@ export default class ProductManager {
 		// 	if (productsFile) {
 		// 		await productsModel.findOneAndUpdate({ _id: idProd }, product);
 		// 		const updatedProduct = await this.getProductById(idProd);
-		// 		return updatedProduct + console.log('Product updated');
+		// 		return updatedProduct + //console.log('Product updated');
 		// 	} else {
 		// 		throw new Error(`Product not found`);
 		// 	}
 		// } catch (error) {
-		// 	console.log(`Error modifying product ${idProd}: ${error.message}`);
+		// 	//console.log(`Error modifying product ${idProd}: ${error.message}`);
 		// }
 		try {
 			const updatedProduct = await productsModel.findOneAndUpdate(
@@ -126,7 +126,7 @@ export default class ProductManager {
 			);
 			return updatedProduct;
 		} catch (error) {
-			console.log(error);
+			//console.log(error);
 		}
 	}
 
@@ -135,7 +135,7 @@ export default class ProductManager {
 			await productsModel.deleteMany();
 			return 'Products deleted';
 		} catch (error) {
-			console.log('No products found');
+			//console.log('No products found');
 		}
 	}
 
@@ -170,7 +170,7 @@ export default class ProductManager {
 			};
 			return { info, results: result.docs };
 		} catch (error) {
-			console.log(error);
+			//console.log(error);
 		}
 	}
 	// #idGenerator = (products) => {
