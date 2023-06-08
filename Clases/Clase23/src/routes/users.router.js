@@ -1,4 +1,5 @@
 import { Router } from 'express';
+import { usersModel } from '../persistencia/models/users.model.js';
 
 const router = Router();
 /*
@@ -22,6 +23,7 @@ router.delete('/:username([a-zA-Z+])', (req, res) => {
 */
 router.get('/:username', (req, res) => {
 	// a la ruta dentro del () le podemos pasar la restriccion en Expresiones regulares
+	console.log(req.params);
 	const { username } = req.params;
 	res.send(`El username es ${username}`);
 });

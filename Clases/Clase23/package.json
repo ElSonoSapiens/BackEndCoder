@@ -1,9 +1,9 @@
 {
-	"name": "clase23",
+	"name": "23. Ruteo avanzado y estrategias avanzadas de autorización",
 	"version": "1.0.0",
 	"description": "",
 	"main": "index.js",
-  "type": "module",
+	"type": "module",
 	"scripts": {
 		"start": " nodemon src/app.js"
 	},

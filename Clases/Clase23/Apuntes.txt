@@ -3,5 +3,12 @@ Clase 23 - Ruteo avanzado y estrategias avanzadas de autorización
 
 No todos los parametros son buenos
   Hay que buscar la forma de setear el tipo y el formato de param a recibir
-  - Hay forma de configurar desde la ruta los requisitos del param ( solo letras, o solo numeros, o NO caracteres especiales
-  )
+  - Hay forma de configurar desde la ruta los requisitos del param ( solo letras, o solo numeros, o NO caracteres especiales)
+
+
+Por que customizar un router
+  - Manejo sistematizado de respuestas
+  - Respuestas predefinidas
+  - Estandarizacion
+  - Autorizacion siempre a nivel de rutas
+  - Permite dinamizar el middleware
