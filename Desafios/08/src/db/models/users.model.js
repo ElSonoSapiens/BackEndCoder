@@ -21,7 +21,7 @@ const usersSchema = new mongoose.Schema({
 	role: {
 		type: String,
 		required: true,
-		default: 'guitarist',
+		default: 'user',
 	},
 });
 
