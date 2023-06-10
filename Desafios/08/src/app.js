@@ -15,9 +15,10 @@ import cookieParser from 'cookie-parser';
 import mongoStore from 'connect-mongo';
 import usersRouter from './routes/users.router.js';
 // passport
-import '../passport/passportStrategies.js';
+import '../src/passport/passportStrategies.js';
 import passport from 'passport';
 import sessionsRouter from './routes/sessions.router.js';
+import jwtRouter from './routes/jwt.router.js';
 
 const app = express();
 //const productManager = new ProductManager(__dirname + "/Products.json");
@@ -29,13 +30,6 @@ const chatManager = new ChatManager();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(__dirname + '/public'));
-
-// PORT
-const PORT = 8080;
-// HTTP Server
-const httpServer = app.listen(PORT, () => {
-	//console.log(`escuchando al puerto ${PORT}`);
-});
 
 // Mongo session
 app.use(
@@ -71,6 +65,14 @@ app.use('/views', viewsRouter);
 app.use('/chat', chatRouter);
 app.use('/users', usersRouter);
 app.use('/api/sessions', sessionsRouter);
+app.use('/jwt', jwtRouter);
+
+// PORT
+const PORT = 8080;
+// HTTP Server
+const httpServer = app.listen(PORT, () => {
+	//console.log(`escuchando al puerto ${PORT}`);
+});
 
 // WEBSOCKET
 const infoMensajes = [];

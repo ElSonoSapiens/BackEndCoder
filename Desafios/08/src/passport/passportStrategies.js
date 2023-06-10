@@ -1,12 +1,15 @@
 import passport from 'passport';
 import { Strategy as LocalStrategy } from 'passport-local'; // se renombra para poder diferenciarlo
 import { Strategy as GithubStrategy } from 'passport-github2';
-
-import { usersModel } from '../src/db/models/users.model.js';
-import { hashData, compareData } from '../src/utils.js';
-import UsersManager from '../src/dao/UsersManager.js';
+import { ExtractJwt, Strategy as JWTStrategy } from 'passport-jwt'; // se renombra para poder diferenciarlo
+import { usersModel } from '../db/models/users.model.js';
+import { hashData, compareData } from '../utils.js';
+import UsersManager from '../dao/UsersManager.js';
 
 const usersManager = new UsersManager();
+
+const secretKeyJWT = 'secretJWT';
+
 //
 // REGISTRO
 //
@@ -113,6 +116,23 @@ passport.use(
 			} catch (error) {
 				done(null, false);
 			}
+		}
+	)
+);
+
+//
+// JWT
+//
+passport.use(
+	'jwt',
+	new JWTStrategy(
+		{
+			jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+			secretOrKey: secretKeyJWT,
+		},
+		async (jwt_payload, done) => {
+			// console.log(jwt_payload);
+			done(null, jwt_payload);
 		}
 	)
 );
