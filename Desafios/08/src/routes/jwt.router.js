@@ -42,12 +42,12 @@ router.post('/loginCookies', jwtValidation, async (req, res) => {
 	}
 });
 
-router.get(
-	'/loginPassport',
-	passport.authenticate('jwt', { session: false }), // jwt es la alternativa a sessions
-	(req, res) => {
-		res.send(`User ${req.user.email} logged`);
-	}
-);
+// router.get(
+// 	'/loginPassport',
+// 	passport.authenticate('jwt', { session: false }), // jwt es la alternativa a sessions
+// 	(req, res) => {
+// 		res.send(`User ${req.user.email} logged`);
+// 	}
+// );
 
 export default router;

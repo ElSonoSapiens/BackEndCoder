@@ -131,8 +131,8 @@ passport.use(
 			secretOrKey: secretKeyJWT,
 		},
 		async (jwt_payload, done) => {
-			// console.log(jwt_payload);
-			done(null, jwt_payload);
+			console.log('JWT', jwt_payload);
+			// done(null, jwt_payload);
 		}
 	)
 );

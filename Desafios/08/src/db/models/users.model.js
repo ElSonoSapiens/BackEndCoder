@@ -14,9 +14,16 @@ const usersSchema = new mongoose.Schema({
 		required: true,
 		unique: true,
 	},
+	age: {
+		type: Number,
+		required: true,
+	},
 	password: {
 		type: String,
 		required: true,
+	},
+	cartId: {
+		type: String,
 	},
 	role: {
 		type: String,

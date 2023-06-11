@@ -11,6 +11,7 @@ export const jwtValidation = (req, res, next) => {
 	// para quitar el Bearer
 	const token = authHeader.split(' ')[1];
 	//
+	console.log(authHeader);
 	// Verificar la informacion del usuario que llega del token
 	// const verifiedUser = jwt.verify(token, 'secretKey'); // => da error porque la secretKey es incorrecta
 	const verifiedUser = jwt.verify(token, secretKeyJWT);

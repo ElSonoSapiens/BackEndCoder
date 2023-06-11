@@ -64,6 +64,10 @@ router.post(
 // LOGIN
 //
 
+//
+// LOGIN
+//
+
 router.post(
 	'/login',
 	passport.authenticate('login', {
@@ -71,6 +75,28 @@ router.post(
 		successRedirect: '/views/realtimeproducts',
 	})
 );
+
+//
+// JWT
+//
+
+/*
+router.post(
+	'/login',
+	passport.authenticate('jwt', {
+		failureRedirect: '/views/errorLogin',
+		successRedirect: '/views/realtimeproducts',
+	})
+);
+*/
+
+//
+// CURRENT
+//
+
+router.get("/current")
+
+
 
 // router.post('/login', async (req, res) => {
 // 	const { email, password } = req.body;
@@ -133,3 +159,6 @@ router.get('/logout', (req, res) => {
 	});
 });
 export default router;
+
+
+
