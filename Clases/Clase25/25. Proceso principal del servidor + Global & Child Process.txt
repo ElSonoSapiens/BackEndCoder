@@ -1,0 +1,15 @@
+25. Proceso principal del servidor + Global & Child Process
+
+- conocer objeto Process
+- endender implementaciones de un Process
+- aprender a manejar variables de entorno
+
+// Commander => libreria mas usadas para el manejo de argumentos
+	npm i commander
+  import {program} from "commander"
+
+// dotenv => variables de entorno
+
+  npm i dotenv
+
+  

@@ -61,8 +61,22 @@ import FileStore from 'session-file-store';
 // Jason Web Token => KWT
 	npm i jsonwebtoken
 
+// Commander => libreria mas usadas para el manejo de argumentos
+	npm i commander
+	crear src/commander.js
+import {program} from "commander"
 
 
+// dotenv => variables de entorno
+
+  npm i dotenv
+
+
+
+
+
+
+import { fork } from 'child_process';
 
 -------------
 
