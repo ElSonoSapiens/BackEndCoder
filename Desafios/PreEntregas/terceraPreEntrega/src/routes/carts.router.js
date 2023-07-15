@@ -230,4 +230,6 @@ router.put('/:cid/products/:pid', async (req, res) => {
 	}
 });
 
+/:cid/purchase
+
 export default router;
