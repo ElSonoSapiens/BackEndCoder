@@ -37,3 +37,5 @@ export default class TicketManager {
 		}
 	}
 }
+
+//hacer schema del tkt y un tkt manager con CRUD
